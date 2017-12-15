@@ -22,8 +22,8 @@ exports.getAll = (req, res, next) => {
 }*/
 
 exports.getOne = (req, res, next) => {
-    if (req.user) {
-        Post.findOne({ _id: req.params.id }, (err, data) => {
+   // if (req.user) {
+        Post.find({ title: req.params.id }, (err, data) => {
             if (err) {
                 console.log('Failure: ' + err);
                 return next(err);
@@ -34,12 +34,12 @@ exports.getOne = (req, res, next) => {
             }
         });
     }
-    else {
+  /*  else {
         res.status(400).send({
             message: 'User is not signed in'
         });
     }
-}
+}*/
 
 exports.getMyPost = (req, res, next) => {
     if (req.user) {

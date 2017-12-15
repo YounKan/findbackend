@@ -28,6 +28,20 @@ exports.getPro = (req, res, next) => {
     });
 }
 
+exports.getDelete = (req, res, next) => {
+    var user = new User(req.body);
+    User.remove({username : req.params.username},(err, user) => {
+           if (err) {
+                  console.log('Failure');
+                  return next(err);
+           }
+           else {
+                  console.log('Success');
+                  res.json(user);
+           }
+    });
+}
+
 
 /*-----------------------------------------------------*/
 exports.create = (req, res, next) => {
@@ -47,15 +61,15 @@ exports.create = (req, res, next) => {
 /*-----------------------------------------------------*/
 
 exports.edit = (req, res, next) => {
-    User.update({_id: req.params.id}, {
+    User.update({username: req.body.username}, {
         firstName: req.body.firstName,
-        lastName: req.body.lastlame,
+        lastName: req.body.lastName,
         username: req.body.username,
         email: req.body.email,
         password: req.body.password
     }, function(err, docs){
             if(err) res.json(err)
-            else    res.status(204).end()
+            else    res.status(200).end()
     })
 }
 

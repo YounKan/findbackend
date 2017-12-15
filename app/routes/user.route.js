@@ -6,8 +6,9 @@ module.exports = (app) => {
 
     app.get(path + '/getuser', user.getUsers);
     app.get(path + '/find/:username', user.getPro);
+    app.get(path + '/delete/:username', user.getDelete);
     app.post(path + '/signup', user.create);
-    app.put(path + '/editprofile', user.edit);
+    app.post(path + '/editprofile/', user.edit);
     app.route('/login')
         .get(user.login)
         .post(passport.authenticate('local', {
